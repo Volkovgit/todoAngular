@@ -1,10 +1,7 @@
 <div class="app">
   <div class="app-wrapper">
     <div class="elements">
-      <todo-element></todo-element>
-      <todo-element></todo-element>
-      <todo-element></todo-element>
-      <todo-element></todo-element>
+      <todo-element *ngFor="let item of todoElements" [todoElement]=item (deleteItem)="testFunction($event)"></todo-element>
     </div>
   </div>
 </div>

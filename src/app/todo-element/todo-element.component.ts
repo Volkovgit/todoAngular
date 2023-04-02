@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { todoElement } from '../app.component';
 
 @Component({
   selector: 'todo-element',
@@ -12,17 +13,27 @@ import {
 })
 export class TodoElementComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
+  @Input()
+  todoElement : todoElement={
+    id:0,
+    text:'',
+    active:true
+  };
 
-  text: string = 'blablaba';
+  @Output()
+  deleteItem : EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {}
+  deleteItemEvent(e :any){
+    this.deleteItem.emit(this.todoElement.id)
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: this.text,
+      data: this.todoElement.text,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.text = result;
+      this.todoElement.text = result;
     });
   }
 }

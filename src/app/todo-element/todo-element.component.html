@@ -1,4 +1,5 @@
 <div class="element">
-    <p>{{text}}</p>
-    <button mat-raised-button (click)="openDialog()">Pick one</button>
+    <p>{{todoElement.text}}</p>
+    <button mat-raised-button (click)="openDialog()">Change</button>
+    <button mat-raised-button (click)="deleteItemEvent(this)">Delete</button>
 </div>
