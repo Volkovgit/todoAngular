@@ -1,7 +1,8 @@
 <div class="app">
   <div class="app-wrapper">
+    <todo-creator (createElement)="createNewElement($event)"></todo-creator>
     <div class="elements">
-      <todo-element *ngFor="let item of todoElements" [todoElement]=item (deleteItem)="testFunction($event)"></todo-element>
+      <todo-element *ngFor="let item of todoElements" [todoElement]=item (deleteItem)="deleteElement($event)"></todo-element>
     </div>
   </div>
 </div>

@@ -15,6 +15,7 @@ import {
   DialogOverviewExampleDialog,
   TodoElementComponent,
 } from './todo-element/todo-element.component';
+import { CreateTodoDialog, TodoCreatorComponent } from './todo-creator/todo-creator.component';
 
 const modules = [
   BrowserModule,
@@ -31,6 +32,8 @@ const modules = [
     AppComponent,
     TodoElementComponent,
     DialogOverviewExampleDialog,
+    TodoCreatorComponent,
+    CreateTodoDialog
   ],
   imports: [...modules],
   exports: [...modules],

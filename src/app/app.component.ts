@@ -12,14 +12,22 @@ export type todoElement = {
 })
 export class AppComponent {
   isChecked = true;
-  todoElements : todoElement[] = [
+  todoElements: todoElement[] = [
     { id: 1, text: 'aaaaaa1', active: true },
     { id: 2, text: 'aaaaaa2', active: true },
     { id: 3, text: 'aaaaaa3', active: true },
     { id: 4, text: 'aaaaaa4', active: true },
   ];
 
-  testFunction(id: number) {
+  deleteElement(id: number) {
     this.todoElements = this.todoElements.filter((el) => el.id !== id);
+  }
+
+  createNewElement(text: string) {
+    this.todoElements.push({
+      id: this.todoElements[this.todoElements.length - 1].id + 1,
+      text,
+      active: true,
+    });
   }
 }
