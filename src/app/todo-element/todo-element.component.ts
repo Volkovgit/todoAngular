@@ -5,6 +5,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { todoElement } from '../app.component';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'todo-element',
@@ -33,6 +34,7 @@ export class TodoElementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      if(result!== undefined)
       this.todoElement.text = result;
     });
   }
@@ -43,6 +45,8 @@ export class TodoElementComponent implements OnInit {
   templateUrl: 'dialog-overview-example-dialog.html',
 })
 export class DialogOverviewExampleDialog {
+
+  inputFormControl = new FormControl('',Validators.required)
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: string

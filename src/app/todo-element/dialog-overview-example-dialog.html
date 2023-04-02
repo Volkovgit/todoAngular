@@ -2,10 +2,10 @@
 <div mat-dialog-content>
   <!-- <p>Печатай изменения</p> -->
   <mat-form-field>
-    <input matInput [(ngModel)]="data" />
+    <input matInput [(ngModel)]="data" [formControl]="inputFormControl"/>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  <button  [disabled]="data===''" mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
   <button mat-button (click)="onNoClick()">Cancel</button>
 </div>
