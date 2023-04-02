@@ -1,0 +1,26 @@
+.app {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  &-wrapper {
+    width: 80%;
+  }
+}
+
+.elements {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+todo-element {
+  margin-top: 1%;
+  padding:1%;
+  background-color: gray;
+  border-radius: 20px;
+  width: 100%;
+  display: inline-block;
+}
