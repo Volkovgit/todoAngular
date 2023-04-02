@@ -16,6 +16,7 @@ import {
   TodoElementComponent,
 } from './todo-element/todo-element.component';
 import { CreateTodoDialog, TodoCreatorComponent } from './todo-creator/todo-creator.component';
+import { FilterTodoElementsPipe } from './filter-todo-elements.pipe';
 
 const modules = [
   BrowserModule,
@@ -33,7 +34,8 @@ const modules = [
     TodoElementComponent,
     DialogOverviewExampleDialog,
     TodoCreatorComponent,
-    CreateTodoDialog
+    CreateTodoDialog,
+    FilterTodoElementsPipe
   ],
   imports: [...modules],
   exports: [...modules],

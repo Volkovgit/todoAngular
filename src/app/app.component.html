@@ -1,8 +1,9 @@
 <div class="app">
   <div class="app-wrapper">
     <todo-creator (createElement)="createNewElement($event)"></todo-creator>
+    <input type="text" [(ngModel)]="filter">
     <div class="elements">
-      <todo-element *ngFor="let item of todoElements" [todoElement]=item (deleteItem)="deleteElement($event)"></todo-element>
+      <todo-element *ngFor="let item of todoElements | filterTodoElements:filter" [todoElement]=item (deleteItem)="deleteElement($event)"></todo-element>
     </div>
   </div>
 </div>
