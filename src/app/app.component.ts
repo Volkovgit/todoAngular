@@ -1,4 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
+import { TodoDataService } from './todo-data-service.service';
 
 export type todoElement = {
   id: number;
@@ -16,7 +17,7 @@ export type filterTodo = {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   isChecked = true;
@@ -26,48 +27,12 @@ export class AppComponent {
     favourite: false,
   };
   filtredTodoList: todoElement[];
-  fullList : todoElement[];
-  constructor() {
-    const todoElements: todoElement[] = [
-      {
-        id: 1,
-        text: 'aaaaaa1',
-        active: true,
-        createdAt: new Date(),
-        updatedAt: null,
-        favourite: false,
-      },
-      {
-        id: 2,
-        text: 'aaaaaa2',
-        active: true,
-        createdAt: new Date(),
-        updatedAt: null,
-        favourite: false,
-      },
-      {
-        id: 3,
-        text: 'bbbbbb3',
-        active: true,
-        createdAt: new Date(),
-        updatedAt: null,
-        favourite: false,
-      },
-      {
-        id: 4,
-        text: 'aaaaaa4',
-        active: true,
-        createdAt: new Date(),
-        updatedAt: null,
-        favourite: false,
-      },
-    ];
-    this.fullList = todoElements;
-    this.filtredTodoList = todoElements;
+  constructor(private todoDataService: TodoDataService) {
+    this.filtredTodoList = this.todoDataService.filterList(this.filter);;
   }
 
-  selectFilter(filterType:string){
-    switch (filterType) {
+  selectFilter(sortType:string) : void{
+    switch (sortType) {
       case 'filterByText':
         console.log(this.filtredTodoList.sort(function(a, b) {
           if(a.text < b.text) { return -1; }
@@ -87,20 +52,13 @@ export class AppComponent {
   }
 
   setFavourite(id:number){
-    const item = this.fullList.find(el=>el.id===id) as todoElement;
-    item.favourite = !item.favourite
-    item.updatedAt = new Date();
+    this.todoDataService.setFavouriteToElement(id);
+    this.filterList();
   }
 
   createNewElement(text: string) {
-    this.fullList.push({
-      id: this.filtredTodoList[this.filtredTodoList.length - 1].id + 1,
-      text,
-      active: true,
-      createdAt: new Date(),
-      updatedAt: null,
-      favourite: false,
-    });
+    this.todoDataService.createTodoItem(text);
+    this.filtredTodoList = this.todoDataService.filterList(this.filter)
   }
 
   public filterListByFavourite():void{
@@ -109,18 +67,6 @@ export class AppComponent {
   }
 
   filterList(event: Event | null = null,...callbacks:Function[] | null[] ){
-    if(event)console.log(event.target as HTMLInputElement);
-    let newListWithWiltredItems : todoElement[] = this.fullList;
-    newListWithWiltredItems = newListWithWiltredItems.filter((el)=>{
-      if(!el.text.includes(this.filter.text)) return false;
-      if(this.filter.favourite && el.favourite !== this.filter.favourite) return false;
-      return true
-    });
-    if(callbacks && event){
-      callbacks.forEach(cb=>{
-        if(cb) newListWithWiltredItems = newListWithWiltredItems.filter(el=>cb(el));
-      })
-    }
-    this.filtredTodoList = newListWithWiltredItems;
+    this.filtredTodoList = this.todoDataService.filterList(this.filter)
   }
 }

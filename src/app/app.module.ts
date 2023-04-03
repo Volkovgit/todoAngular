@@ -17,6 +17,7 @@ import {
   TodoElementComponent,
 } from './todo-element/todo-element.component';
 import { CreateTodoDialog, TodoCreatorComponent } from './todo-creator/todo-creator.component';
+import { TodoDataService } from './todo-data-service.service';
 
 const modules = [
   BrowserModule,
@@ -39,7 +40,7 @@ const modules = [
   ],
   imports: [...modules],
   exports: [...modules],
-  providers: [],
+  providers: [TodoDataService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
