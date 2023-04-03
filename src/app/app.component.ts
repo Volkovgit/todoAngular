@@ -71,7 +71,7 @@ export class AppComponent {
   }
 
   createNewElement(text: string) {
-    this.filtredTodoList.push({
+    this.fullList.push({
       id: this.filtredTodoList[this.filtredTodoList.length - 1].id + 1,
       text,
       active: true,
@@ -81,7 +81,14 @@ export class AppComponent {
     });
   }
 
-  filterList(event:any){
-    this.filtredTodoList = this.fullList.filter((el)=>el.text.includes(event.target.value)); 
+  filterList(event: Event | null = null,...callbacks:Function[] | null[] ){
+    let newListWithWiltredItems : todoElement[] = this.fullList;
+    newListWithWiltredItems = newListWithWiltredItems.filter((el)=>el.text.includes(this.filter.text)); 
+    if(callbacks && event){
+      callbacks.forEach(cb=>{
+        if(cb) newListWithWiltredItems = newListWithWiltredItems.filter(el=>cb(el));
+      })
+    }
+    this.filtredTodoList = newListWithWiltredItems;
   }
 }
