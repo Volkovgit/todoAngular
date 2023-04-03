@@ -47,7 +47,7 @@ export class AppComponent {
       },
       {
         id: 3,
-        text: 'aaaaaa3',
+        text: 'bbbbbb3',
         active: true,
         createdAt: new Date(),
         updatedAt: null,
@@ -64,6 +64,22 @@ export class AppComponent {
     ];
     this.fullList = todoElements;
     this.filtredTodoList = todoElements;
+  }
+
+  selectFilter(filterType:string){
+    switch (filterType) {
+      case 'filterByText':
+        console.log(this.filtredTodoList.sort(function(a, b) {
+          if(a.text < b.text) { return -1; }
+          if(a.text > b.text) { return 1; }
+          return 0;
+        }));
+        this.filtredTodoList = this.filtredTodoList.sort()
+        break;
+      default:
+        this.filterList();
+        break;
+    }
   }
 
   deleteElement(id: number) {
@@ -87,14 +103,13 @@ export class AppComponent {
     });
   }
 
-  filterListByFavourite(){
+  public filterListByFavourite():void{
     this.filter.favourite = !this.filter.favourite;
     this.filterList();
   }
 
   filterList(event: Event | null = null,...callbacks:Function[] | null[] ){
     if(event)console.log(event.target as HTMLInputElement);
-    console.log(this.filter);
     let newListWithWiltredItems : todoElement[] = this.fullList;
     newListWithWiltredItems = newListWithWiltredItems.filter((el)=>{
       if(!el.text.includes(this.filter.text)) return false;

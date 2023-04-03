@@ -3,6 +3,14 @@
     <todo-creator (createElement)="createNewElement($event)"></todo-creator>
     <input type="text" [(ngModel)]="filter.text" (input)="filterList()" >
     <button mat-raised-button  (click)="filterListByFavourite()">Filter By Favourite</button>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose one</mat-label>
+      <mat-select (valueChange)="selectFilter($event)">
+        <mat-option>Clear filter</mat-option>
+        <mat-option value="filterByText">filter by text</mat-option>
+        <mat-option value="filterByFavourite">Filter by Favourite</mat-option>
+      </mat-select>
+    </mat-form-field>
     <div class="elements">
       <todo-element *ngFor="let item of filtredTodoList" [todoElement]=item (deleteItem)="deleteElement($event)" (setFavouriteItem)="setFavourite($event)"></todo-element>
     </div>
