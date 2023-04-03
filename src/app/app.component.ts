@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 
 export type todoElement = {
   id: number;
@@ -70,6 +70,12 @@ export class AppComponent {
     this.filtredTodoList = this.filtredTodoList.filter((el) => el.id !== id);
   }
 
+  setFavourite(id:number){
+    const item = this.fullList.find(el=>el.id===id) as todoElement;
+    item.favourite = !item.favourite
+    item.updatedAt = new Date();
+  }
+
   createNewElement(text: string) {
     this.fullList.push({
       id: this.filtredTodoList[this.filtredTodoList.length - 1].id + 1,
@@ -81,9 +87,20 @@ export class AppComponent {
     });
   }
 
+  filterListByFavourite(){
+    this.filter.favourite = !this.filter.favourite;
+    this.filterList();
+  }
+
   filterList(event: Event | null = null,...callbacks:Function[] | null[] ){
+    if(event)console.log(event.target as HTMLInputElement);
+    console.log(this.filter);
     let newListWithWiltredItems : todoElement[] = this.fullList;
-    newListWithWiltredItems = newListWithWiltredItems.filter((el)=>el.text.includes(this.filter.text)); 
+    newListWithWiltredItems = newListWithWiltredItems.filter((el)=>{
+      if(!el.text.includes(this.filter.text)) return false;
+      if(this.filter.favourite && el.favourite !== this.filter.favourite) return false;
+      return true
+    });
     if(callbacks && event){
       callbacks.forEach(cb=>{
         if(cb) newListWithWiltredItems = newListWithWiltredItems.filter(el=>cb(el));

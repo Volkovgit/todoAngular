@@ -38,9 +38,15 @@ export class TodoElementComponent implements OnInit {
   @Output()
   deleteItem: EventEmitter<number> = new EventEmitter<number>();
 
+  @Output()
+  setFavouriteItem : EventEmitter<number> = new EventEmitter<number>();
+
   ngOnInit(): void {}
-  deleteItemEvent(e: any) : void {
+  deleteItemEvent() : void {
     this.deleteItem.emit(this.todoElement.id);
+  }
+  setFavourite(){
+    this.setFavouriteItem.emit(this.todoElement.id)
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {

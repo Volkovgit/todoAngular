@@ -1,5 +1,6 @@
 <div class="element">
     <p>{{todoElement.text}}</p>
     <button mat-raised-button (click)="openDialog()">Change</button>
-    <button mat-raised-button (click)="deleteItemEvent(this)">Delete</button>
+    <button mat-raised-button (click)="deleteItemEvent()">Delete</button>
+    <button mat-raised-button (click)="setFavourite()" [ngClass]="{'red-color':todoElement.favourite === true}">Favourite</button>
 </div>
