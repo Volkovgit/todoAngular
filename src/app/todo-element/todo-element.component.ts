@@ -1,4 +1,11 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -13,20 +20,27 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./todo-element.component.scss'],
 })
 export class TodoElementComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    
+  }
   @Input()
-  todoElement : todoElement={
-    id:0,
-    text:'',
-    active:true
+  todoElement: todoElement = {
+    id: 0,
+    text: '',
+    active: true,
+    createdAt: null,
+    updatedAt: null,
+    favourite: false,
   };
 
+  
+
   @Output()
-  deleteItem : EventEmitter<number> = new EventEmitter<number>();
+  deleteItem: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {}
-  deleteItemEvent(e :any){
-    this.deleteItem.emit(this.todoElement.id)
+  deleteItemEvent(e: any) : void {
+    this.deleteItem.emit(this.todoElement.id);
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
@@ -34,8 +48,7 @@ export class TodoElementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if(result!== undefined)
-      this.todoElement.text = result;
+      if (result !== undefined) this.todoElement.text = result;
     });
   }
 }
@@ -45,8 +58,7 @@ export class TodoElementComponent implements OnInit {
   templateUrl: 'dialog-overview-example-dialog.html',
 })
 export class DialogOverviewExampleDialog {
-
-  inputFormControl = new FormControl('',Validators.required)
+  inputFormControl = new FormControl('', Validators.required);
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: string
