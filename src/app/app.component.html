@@ -1,6 +1,6 @@
 <div class="app">
   <div class="app-wrapper">
-    <todo-creator (createElement)="createNewElement($event)"></todo-creator>
+    <todo-creator (createElement)="createNewElement($event,$event)"></todo-creator>
     <input type="text" [(ngModel)]="filter.text" (input)="filterList()" >
     <button mat-raised-button  (click)="filterListByFavourite()">Filter By Favourite</button>
     <mat-form-field appearance="fill">

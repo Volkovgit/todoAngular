@@ -27,6 +27,7 @@ export class TodoElementComponent implements OnInit {
   todoElement: todoElement = {
     id: 0,
     text: '',
+    title:'',
     active: true,
     createdAt: null,
     updatedAt: null,

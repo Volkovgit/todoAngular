@@ -6,8 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // components
@@ -16,7 +17,10 @@ import {
   DialogOverviewExampleDialog,
   TodoElementComponent,
 } from './todo-element/todo-element.component';
-import { CreateTodoDialog, TodoCreatorComponent } from './todo-creator/todo-creator.component';
+import {
+  CreateTodoDialog,
+  TodoCreatorComponent,
+} from './todo-creator/todo-creator.component';
 import { TodoDataService } from './todo-data-service.service';
 
 const modules = [
@@ -27,7 +31,9 @@ const modules = [
   MatFormFieldModule,
   MatInputModule,
   ReactiveFormsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatExpansionModule,
+  MatButtonModule,
 ];
 
 @NgModule({
@@ -36,7 +42,7 @@ const modules = [
     TodoElementComponent,
     DialogOverviewExampleDialog,
     TodoCreatorComponent,
-    CreateTodoDialog
+    CreateTodoDialog,
   ],
   imports: [...modules],
   exports: [...modules],

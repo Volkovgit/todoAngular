@@ -3,6 +3,7 @@ import { TodoDataService } from './todo-data-service.service';
 
 export type todoElement = {
   id: number;
+  title:string
   text: string;
   active: boolean;
   createdAt: Date | null;
@@ -48,7 +49,8 @@ export class AppComponent {
   }
 
   deleteElement(id: number) {
-    this.filtredTodoList = this.filtredTodoList.filter((el) => el.id !== id);
+    this.todoDataService.deleteElement(id);
+    this.filterList();
   }
 
   setFavourite(id:number){
@@ -56,9 +58,9 @@ export class AppComponent {
     this.filterList();
   }
 
-  createNewElement(text: string) {
-    this.todoDataService.createTodoItem(text);
-    this.filtredTodoList = this.todoDataService.filterList(this.filter)
+  createNewElement(text: string,title:string):void {
+    this.todoDataService.createTodoItem(text,title);
+    this.filterList();
   }
 
   public filterListByFavourite():void{

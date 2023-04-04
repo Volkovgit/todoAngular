@@ -1,6 +1,18 @@
-<div class="element">
-    <p>{{todoElement.text}}</p>
-    <button mat-raised-button (click)="openDialog()">Change</button>
-    <button mat-raised-button (click)="deleteItemEvent()">Delete</button>
-    <button mat-raised-button (click)="setFavourite()" [ngClass]="{'red-color':todoElement.favourite === true}">Favourite</button>
-</div>
+<mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title> {{todoElement.title}} </mat-panel-title>
+    <mat-panel-description>
+      {{ todoElement.text }}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>{{ todoElement.text }}</p>
+  <button mat-raised-button (click)="openDialog()">Change</button>
+  <button mat-raised-button (click)="deleteItemEvent()">Delete</button>
+  <button
+    mat-raised-button
+    (click)="setFavourite()"
+    [ngClass]="{ 'red-color': todoElement.favourite === true }"
+  >
+    Favourite
+  </button>
+</mat-expansion-panel>
