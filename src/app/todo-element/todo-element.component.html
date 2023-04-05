@@ -1,18 +1,13 @@
 <mat-expansion-panel hideToggle>
-  <mat-expansion-panel-header>
-    <mat-panel-title> {{todoElement.title}} </mat-panel-title>
+  <mat-expansion-panel-header class="right-aligned-header">
+    <mat-panel-title> {{ todoElement.title }} </mat-panel-title>
     <mat-panel-description>
-      {{ todoElement.text }}
+      {{ todoElement.text | slice: 0:30}}
     </mat-panel-description>
+    <mat-icon (click)="deleteItemEvent()">delete</mat-icon>
+    <mat-icon *ngIf="todoElement.favourite === false"  (click)="setFavourite()">favorite_border</mat-icon>
+    <mat-icon *ngIf="todoElement.favourite === true" (click)="setFavourite()">favorite</mat-icon>
   </mat-expansion-panel-header>
   <p>{{ todoElement.text }}</p>
-  <button mat-raised-button (click)="openDialog()">Change</button>
-  <button mat-raised-button (click)="deleteItemEvent()">Delete</button>
-  <button
-    mat-raised-button
-    (click)="setFavourite()"
-    [ngClass]="{ 'red-color': todoElement.favourite === true }"
-  >
-    Favourite
-  </button>
+  <mat-icon (click)="openDialog()">edit</mat-icon>
 </mat-expansion-panel>

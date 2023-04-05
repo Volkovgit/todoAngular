@@ -12,7 +12,12 @@
       </mat-select>
     </mat-form-field>
     <div class="elements">
-      <todo-element *ngFor="let item of filtredTodoList" [todoElement]=item (deleteItem)="deleteElement($event)" (setFavouriteItem)="setFavourite($event)"></todo-element>
+      <mat-accordion>
+      <!-- <todo-element *ngFor="let item of filtredTodoList" [todoElement]=item (deleteItem)="deleteElement($event)" (setFavouriteItem)="setFavourite($event)"></todo-element> -->
+    </mat-accordion>
     </div>
+    <mat-accordion>
+      <todo-element *ngFor="let item of filtredTodoList" [todoElement]=item (deleteItem)="deleteElement($event)" (setFavouriteItem)="setFavourite($event)"></todo-element>
+    </mat-accordion>
   </div>
 </div>

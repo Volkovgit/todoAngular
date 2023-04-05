@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { filterTodo, todoElement } from './app.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoDataService {
-  private data : todoElement[] = [
+  private data: todoElement[] = [
     {
       id: 1,
       text: 'aaaaaa1',
-      title:'Title text',
+      title: 'Title text',
       active: true,
       createdAt: new Date(),
       updatedAt: null,
@@ -17,7 +17,8 @@ export class TodoDataService {
     },
     {
       id: 2,
-      text: 'aaaaaa2',title:'Title text2',
+      text: 'aaaaaa2',
+      title: 'Title text2',
       active: true,
       createdAt: new Date(),
       updatedAt: null,
@@ -25,7 +26,8 @@ export class TodoDataService {
     },
     {
       id: 3,
-      text: 'bbbbbb3',title:'Title text1',
+      text: 'bbbbbb3',
+      title: 'Title text1',
       active: true,
       createdAt: new Date(),
       updatedAt: null,
@@ -33,31 +35,37 @@ export class TodoDataService {
     },
     {
       id: 4,
-      text: 'aaaaaa4',title:'Title text',
+      text: 'aaaaaa4aaaaaa4aaaaaa4aaaaaa4aaaaaa4aaaaaa4aaaaaa4aaaaaa4aaaaaa4aaaaaa4aaaaaa4',
+      title: 'Title text',
       active: true,
       createdAt: new Date(),
       updatedAt: null,
       favourite: false,
     },
   ];
-  constructor() { }
+  constructor() {}
 
-  public setFavouriteToElement(id:number):void{
-    const item = this.data.find(el=>el.id===id) as todoElement;
-    item.favourite = !item.favourite
+  public setFavouriteToElement(id: number): void {
+    const item = this.data.find((el) => el.id === id) as todoElement;
+    item.favourite = !item.favourite;
     item.updatedAt = new Date();
   }
 
-  public deleteElement(id:number):void{
+  public deleteElement(id: number): void {
     this.data = this.data.filter((el) => el.id !== id);
   }
 
-  public filterList(filter:filterTodo,event: Event | null = null,...callbacks:Function[] | null[] ){
-    let newListWithFiltredItems : todoElement[] = this.data;
-    newListWithFiltredItems = newListWithFiltredItems.filter((el)=>{
-      if(!el.text.includes(filter.text) && !el.title.includes(filter.text)) return false;
-      if(filter.favourite && el.favourite !== filter.favourite) return false;
-      return true
+  public filterList(
+    filter: filterTodo,
+    event: Event | null = null,
+    ...callbacks: Function[] | null[]
+  ) {
+    let newListWithFiltredItems: todoElement[] = this.data;
+    newListWithFiltredItems = newListWithFiltredItems.filter((el) => {
+      if (!el.text.includes(filter.text) && !el.title.includes(filter.text))
+        return false;
+      if (filter.favourite && el.favourite !== filter.favourite) return false;
+      return true;
     });
     // заготовка на возможные callback функции
     // if(callbacks && event){
@@ -68,13 +76,12 @@ export class TodoDataService {
     return newListWithFiltredItems;
   }
 
-
-  public createTodoItem(text:string,title:string):void{
-    this.data.push(this.generateTodoElementData(text,title));
+  public createTodoItem(text: string, title: string): void {
+    this.data.push(this.generateTodoElementData(text, title));
     console.log(this.data);
   }
 
-  private generateTodoElementData(text:string,title:string):todoElement{
+  private generateTodoElementData(text: string, title: string): todoElement {
     return {
       id: this.data[this.data.length - 1].id + 1,
       text,
@@ -83,6 +90,6 @@ export class TodoDataService {
       createdAt: new Date(),
       updatedAt: null,
       favourite: false,
-    }
+    };
   }
 }
