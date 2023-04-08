@@ -1,5 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { TodoDataService } from './todo-data-service.service';
+import { dialogDataNewElement } from './todo-creator/todo-creator.component';
 
 export type todoElement = {
   id: number;
@@ -58,8 +59,8 @@ export class AppComponent {
     this.filterList();
   }
 
-  createNewElement(text: string,title:string):void {
-    this.todoDataService.createTodoItem(text,title);
+  createNewElement(newElementData : dialogDataNewElement):void {
+    this.todoDataService.createTodoItem(newElementData);
     this.filterList();
   }
 

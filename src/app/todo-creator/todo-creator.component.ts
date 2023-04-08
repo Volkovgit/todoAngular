@@ -1,49 +1,59 @@
-import { Component, OnInit,Inject, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { todoElement } from '../app.component';
+
+export type dialogDataNewElement = {
+  title: string;
+  description: string;
+};
 
 @Component({
   selector: 'todo-creator',
   templateUrl: './todo-creator.component.html',
-  styleUrls: ['./todo-creator.component.scss']
+  styleUrls: ['./todo-creator.component.scss'],
 })
 export class TodoCreatorComponent implements OnInit {
-
-  text : string = '';
+  text: string = '';
 
   @Output()
-  createElement : EventEmitter<string> = new EventEmitter<string>();
+  createElement: EventEmitter<dialogDataNewElement> = new EventEmitter<dialogDataNewElement>();
 
+  constructor(private dialog: MatDialog) {}
 
-  constructor(private dialog :MatDialog) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateTodoDialog, {
-      data: this.text,
+      data: {
+        title: '',
+        description: '',
+      },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: dialogDataNewElement) => {
       if(result!== undefined)
       this.createElement.emit(result)
     });
   }
-
 }
+
+
 
 @Component({
   selector: 'create-dialog',
-  templateUrl: 'dialog.html',
+  templateUrl: './dialog.html',
+  styleUrls: ['./dialog.scss'],
 })
 export class CreateTodoDialog {
-
-  inputFormControl = new FormControl('',Validators.required)
+  inputFormControl = new FormControl('', Validators.required);
   constructor(
     public dialogRef: MatDialogRef<CreateTodoDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: string
+    @Inject(MAT_DIALOG_DATA) public data: dialogDataNewElement
   ) {}
 
   onNoClick(): void {

@@ -1,6 +1,6 @@
 <mat-expansion-panel hideToggle>
   <mat-expansion-panel-header class="right-aligned-header">
-    <mat-panel-title> {{ todoElement.title }} </mat-panel-title>
+    <mat-panel-title> {{ todoElement.title | slice: 0:20}} </mat-panel-title>
     <mat-panel-description>
       {{ todoElement.text | slice: 0:30}}
     </mat-panel-description>
@@ -8,6 +8,7 @@
     <mat-icon *ngIf="todoElement.favourite === false"  (click)="setFavourite()">favorite_border</mat-icon>
     <mat-icon *ngIf="todoElement.favourite === true" (click)="setFavourite()">favorite</mat-icon>
   </mat-expansion-panel-header>
+  <h4>{{ todoElement.title}}</h4>
   <p>{{ todoElement.text }}</p>
   <mat-icon (click)="openDialog()">edit</mat-icon>
 </mat-expansion-panel>

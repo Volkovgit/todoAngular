@@ -1,10 +1,31 @@
-<h1 mat-dialog-title>Create</h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <input matInput [formControl]="inputFormControl" [(ngModel)]="data"/>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button  [disabled]="data===''" mat-button [mat-dialog-close]="data" cdkFocusInitial>Create</button>
-  <button mat-button (click)="onNoClick()">Cancel</button>
+<div class="container">
+  <h1 mat-dialog-title>New Element</h1>
+  <div mat-dialog-content>
+    <mat-form-field style="width: 100%">
+      <input
+        matInput
+        [formControl]="inputFormControl"
+        [(ngModel)]="data.title"
+      />
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+      <textarea
+        style="min-height: 200px"
+        matInput
+        [formControl]="inputFormControl"
+        [(ngModel)]="data.description"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      [disabled]="data.title===''"
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+    >
+      Create
+    </button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+  </div>
 </div>

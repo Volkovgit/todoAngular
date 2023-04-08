@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { filterTodo, todoElement } from './app.component';
+import { dialogDataNewElement } from './todo-creator/todo-creator.component';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class TodoDataService {
     {
       id: 2,
       text: 'aaaaaa2',
-      title: 'Title text2',
+      title: 'Title text2Title text2Title text2',
       active: true,
       createdAt: new Date(),
       updatedAt: null,
@@ -76,8 +77,8 @@ export class TodoDataService {
     return newListWithFiltredItems;
   }
 
-  public createTodoItem(text: string, title: string): void {
-    this.data.push(this.generateTodoElementData(text, title));
+  public createTodoItem(newElement : dialogDataNewElement): void {
+    this.data.push(this.generateTodoElementData(newElement.description, newElement.title));
     console.log(this.data);
   }
 
